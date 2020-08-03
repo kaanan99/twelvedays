@@ -35,4 +35,4 @@ sing_day <- function(dataset, line, phrase_col){
   return(invisible(""))
 
 }
-#sing_day(xmas, 12, "Full.Phrase")
+#sing_day(xmas, 1, "Full.Phrase")
