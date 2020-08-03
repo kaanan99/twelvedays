@@ -14,11 +14,25 @@
 #'
 #' @export
 sing_day <- function(dataset, line, phrase_col){
-  pluralize_gift("hi")
-  #phrases <- dataset %>% pull({{phrase_col}})
-
-  #????
-
+  day_word <- dataset$Day.in.Words[line]
+  #dataset modifications
+  dataset <- dplyr::filter(dataset, dataset$Day <= line)
+  dataset <- dplyr::mutate(dataset, Gift.Item = pluralize_gift(dataset$Gift.Item))
+  dataset <- dplyr::arrange(dataset, dplyr::desc(dataset$Day))
+  dataset[[phrase_col]] <- purrr::pmap(dataset,  ~make_phrase(..1, ..2, ..3, ..4, ..5, ..6))
+  #printing
+  phrases <- dplyr::pull(dataset, {{phrase_col}})
+  #special case for day 1
+  if(line == 1){
+    phrases [[1]] <- stringr::str_remove(phrases[[1]], "and ")
+  }
+  #Rest of printing
+  cat("On the ")
+  cat(day_word)
+  cat( " day of Christmas, my true love sent to me,\n")
+  list <- purrr::map(phrases, ~cat(.x, sep = "\n"))
+  cat("\n")
+  return(invisible(""))
 
 }
-sing_day("a", "b", "c")
+#sing_day(xmas, 12, "Full.Phrase")

@@ -20,4 +20,4 @@ pluralize_gift <- function(gift){
   return(gift)
 }
 
-pluralize_gift(xmas$Gift.Item)
+#pluralize_gift(xmas$Gift.Item)
