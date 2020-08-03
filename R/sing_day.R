@@ -14,10 +14,11 @@
 #'
 #' @export
 sing_day <- function(dataset, line, phrase_col){
-
-  phrases <- dataset %>% pull({{phrase_col}})
+  pluralize_gift("hi")
+  #phrases <- dataset %>% pull({{phrase_col}})
 
   #????
 
 
 }
+sing_day("a", "b", "c")
